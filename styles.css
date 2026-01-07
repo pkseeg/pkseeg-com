@@ -1,0 +1,926 @@
+/* ========================================
+   🎨 COLORS & FONTS - Edit these first!
+   ======================================== */
+
+/*
+ * FONTS
+ * -----
+ * Change the Google Fonts URL below to use different fonts.
+ * Current: DM Mono (monospace body) + Instrument Serif (headings)
+ * 
+ * Browse fonts at: https://fonts.google.com/
+ */
+@import url('https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Instrument+Serif:ital@0;1&display=swap');
+
+:root {
+    /* 
+     * BACKGROUND COLORS
+     * -----------------
+     */
+    --bg-main: #BBBBBB;          /* Page background (dark) */
+    --bg-texture: #070707;       /* Texture overlay color */
+
+    /* 
+     * CARD COLORS
+     * -----------
+     */
+    --card-bg: #FFFFFF;          /* Main card background (early internet beige) */
+    --card-bg-alt: #e5ded4;      /* Slightly darker beige for headers/alternates */
+    --card-border: #333;         /* Card border color */
+    --card-shadow: rgba(0, 0, 0, 0.5);  /* Drop shadow behind cards */
+
+    /* 
+     * TEXT COLORS
+     * -----------
+     */
+    --text-dark: #1a1a1a;        /* Main text color */
+    --text-muted: #555;          /* Secondary/lighter text */
+
+    /* 
+     * ACCENT & LINK COLORS
+     * --------------------
+     */
+    --accent: #333;              /* Buttons, highlights, decorations */
+    --accent-hover: #000;        /* Accent color on hover */
+    --link: #444;                /* Link text color */
+    --link-hover: #000;          /* Link color on hover */
+}
+
+/*
+ * FONT SETTINGS
+ * -------------
+ * body-font: Used for most text
+ * heading-font: Used for titles and card headers
+ */
+
+
+/* ========================================
+   Base Styles & Background
+   ======================================== */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    /* Font settings - change 'DM Mono' to your preferred font */
+    font-family: 'basiic', monospace;
+    font-size: 14px;
+    line-height: 1.6;
+    color: var(--text-dark);
+    background-color: var(--bg-main);
+    
+    /* 
+     * PIXEL ART BACKGROUND
+     * --------------------
+     * Replace 'bg-library.png' with your own image!
+     * The image-rendering: pixelated keeps pixel art crisp.
+     */
+    background-image: url('bg-library.png');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    image-rendering: pixelated;
+    min-height: 100vh;
+}
+
+/* Fallback grid pattern (shows if no bg-library.png) */
+body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-image: 
+        linear-gradient(90deg, rgba(40, 40, 40, 0.8) 1px, transparent 1px),
+        linear-gradient(rgba(40, 40, 40, 0.8) 1px, transparent 1px);
+    background-size: 8px 8px;  /* Grid square size */
+    pointer-events: none;
+    z-index: -1;
+}
+
+
+/* ========================================
+   Desktop Layout - Floating Cards Grid
+   ======================================== */
+
+.home-layout {
+    display: grid;
+    grid-template-columns: 280px 1fr 280px;  /* Left sidebar | Center | Right sidebar */
+    grid-template-rows: auto auto auto auto;
+    gap: 20px;
+    padding: 30px;
+    max-width: 1400px;
+    margin: 0 auto;
+    min-height: 100vh;
+    align-items: start;  /* Cards only as tall as their content */
+}
+
+
+/* ========================================
+   Card Base Styles
+   ======================================== */
+
+.card {
+    background: var(--card-bg);
+    border: 2px solid var(--card-border);
+    border-radius: 0;
+    box-shadow: 4px 4px 0 var(--card-shadow);
+    overflow: hidden;
+}
+
+.card-header {
+    background: var(--card-bg);
+    border-bottom: 1px solid var(--card-border);
+    padding: 8px 12px;
+    /* Heading font - change 'Instrument Serif' to your preferred font */
+    font-family: 'basiic', monospace;
+    font-size: 1rem;
+    color: var(--text-dark);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    text-align: center;
+}
+
+
+.card-body {
+    padding: 16px;
+}
+
+
+/* ========================================
+   Left Column Cards
+   ======================================== */
+
+/* Welcome Card - with stacked card effect */
+.card-welcome {
+    grid-column: 1;
+    grid-row: 1;
+    position: relative;
+}
+
+/* Stacked cards behind the welcome card */
+.card-welcome::before,
+.card-welcome::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: var(--card-bg);
+    border: 2px solid var(--card-border);
+    z-index: -1;
+}
+
+.card-welcome::before {
+    transform: translate(10px, 10px);
+}
+
+.card-welcome::after {
+    transform: translate(20px, 20px);
+}
+
+.card-welcome .card-body {
+    text-align: center;
+}
+
+.card-welcome h1 {
+    font-family: 'basiic', monospace;
+    font-size: 1.8rem;
+    color: var(--text-dark);
+    margin-bottom: 8px;
+}
+
+.card-welcome .subtitle {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    margin-bottom: 4px;
+}
+
+.card-welcome .affiliation {
+    font-size: 0.8rem;
+    color: var(--text-muted);
+}
+
+/* About Card */
+.card-about {
+    grid-column: 1;
+    grid-row: 2;
+    margin-top: -8px;
+    margin-left: 12px;
+}
+
+.card-about p {
+    font-size: 0.85rem;
+    color: var(--text-dark);
+}
+
+/* Links Card */
+.card-links {
+    grid-column: 1;
+    grid-row: 3;
+    margin-left: -5px;
+    margin-top: 6px;
+}
+
+.card-links ul {
+    list-style: none;
+}
+
+.card-links li {
+    margin-bottom: 8px;
+}
+
+.card-links a {
+    color: var(--link);
+    text-decoration: none;
+    font-size: 0.9rem;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition: color 0.2s;
+}
+
+.card-links a::before {
+    content: '→';
+    color: var(--accent);
+}
+
+.card-links a:hover {
+    color: var(--link-hover);
+}
+
+
+/* ========================================
+   Right Column Cards
+   ======================================== */
+
+/* Navigation Card */
+.card-nav {
+    grid-column: 3;
+    grid-row: 1;
+    margin-top: 15px;
+    margin-right: 8px;
+}
+
+.card-nav ul {
+    list-style: none;
+}
+
+.card-nav li {
+    margin-bottom: 10px;
+}
+
+.card-nav a {
+    color: var(--text-dark);
+    text-decoration: none;
+    font-size: 0.9rem;
+    display: block;
+    padding: 8px 12px;
+    background: var(--card-bg-alt);
+    border: 1px solid var(--card-border);
+    border-radius: 0;
+    transition: all 0.2s;
+}
+
+.card-nav a:hover,
+.card-nav a.active {
+    background: var(--accent);
+    color: var(--card-bg);
+    border-color: var(--accent);
+}
+
+/* Interests Card */
+.card-interests {
+    grid-column: 3;
+    grid-row: 2;
+    margin-left: 10px;
+    margin-top: -12px;
+}
+
+.interest-tag {
+    display: inline-block;
+    background: var(--card-bg-alt);
+    border: 1px solid var(--card-border);
+    padding: 4px 10px;
+    margin: 3px;
+    font-size: 0.8rem;
+    border-radius: 0;
+    color: var(--text-muted);
+}
+
+/* Gallery Preview Card */
+.card-gallery-preview {
+    grid-column: 2;
+    grid-row: 3;
+    margin-top: -80px;
+    margin-left: 10px;
+    justify-self: center;
+}
+
+.gallery-mini {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+}
+
+.gallery-mini-item {
+    aspect-ratio: 1;
+    width: 120px;
+    height: 120px;
+    background: var(--card-bg-alt);
+    border: 2px solid var(--card-border);
+    border-radius: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2.5rem;
+    color: var(--text-muted);
+    text-decoration: none;
+    overflow: hidden;
+}
+
+.gallery-mini-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.gallery-link {
+    display: block;
+    text-align: center;
+    margin-top: 12px;
+    color: var(--link);
+    text-decoration: none;
+    font-size: 0.85rem;
+}
+
+.gallery-link:hover {
+    color: var(--link-hover);
+}
+
+
+/* ========================================
+   Center Column - Publications Card
+   ======================================== */
+
+.card-publications {
+    grid-column: 2;
+    grid-row: 1 / 4;
+    margin-top: 25px;
+    align-self: start;
+}
+
+.papers-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+    gap: 16px;
+}
+
+.paper-icon {
+    text-align: center;
+    cursor: pointer;
+    transition: transform 0.2s;
+    text-decoration: none;
+}
+
+.paper-icon:hover {
+    transform: translateY(-4px);
+}
+
+.paper-icon-img {
+    width: 80px;
+    height: 80px;
+    margin: 0 auto 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.paper-icon-img img {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+}
+
+.paper-icon-fallback {
+    font-size: 2.5rem;
+}
+
+.paper-icon-label {
+    font-size: 0.75rem;
+    color: var(--text-dark);
+    line-height: 1.3;
+    max-width: 100px;
+    margin: 0 auto;
+}
+
+.papers-footer {
+    margin-top: 24px;
+    padding-top: 16px;
+    border-top: 1px dashed var(--card-border);
+    text-align: center;
+}
+
+.papers-footer a {
+    display: inline-block;
+    background: var(--accent);
+    color: var(--card-bg);
+    padding: 10px 20px;
+    text-decoration: none;
+    border-radius: 0;
+    font-size: 0.9rem;
+    border: 2px solid var(--accent-hover);
+    box-shadow: 2px 2px 0 var(--card-shadow);
+    transition: all 0.2s;
+}
+
+.papers-footer a:hover {
+    background: var(--accent-hover);
+    transform: translate(1px, 1px);
+    box-shadow: 1px 1px 0 var(--card-shadow);
+}
+
+
+/* ========================================
+   Page Layout (Publications, Gallery pages)
+   ======================================== */
+
+.page-layout {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 30px;
+}
+
+.page-card {
+    background: var(--card-bg);
+    border: 2px solid var(--card-border);
+    border-radius: 0;
+    box-shadow: 4px 4px 0 var(--card-shadow);
+    overflow: hidden;
+}
+
+.page-header {
+    background: var(--card-bg);
+    border-bottom: 1px solid var(--card-border);
+    padding: 16px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.page-header h1 {
+    font-family: 'basiic', monospace;
+    font-size: 1.5rem;
+    color: var(--text-dark);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+
+
+.page-nav {
+    display: flex;
+    gap: 12px;
+}
+
+.page-nav a {
+    color: var(--text-muted);
+    text-decoration: none;
+    font-size: 0.85rem;
+    padding: 6px 12px;
+    border-radius: 0;
+    transition: all 0.2s;
+}
+
+.page-nav a:hover {
+    background: var(--card-bg-alt);
+}
+
+.page-nav a.active {
+    background: var(--accent);
+    color: var(--card-bg);
+}
+
+.page-body {
+    padding: 24px;
+}
+
+
+/* ========================================
+   Publication List Styles
+   ======================================== */
+
+.pub-year {
+    font-family: 'basiic', monospace;
+    font-size: 1.3rem;
+    color: var(--accent);
+    margin: 24px 0 16px;
+    padding-bottom: 8px;
+    border-bottom: 1px dashed var(--card-border);
+}
+
+.pub-year:first-child {
+    margin-top: 0;
+}
+
+.paper {
+    background: var(--card-bg);
+    border: 1px solid var(--card-border);
+    border-radius: 0;
+    padding: 16px;
+    margin-bottom: 12px;
+}
+
+.paper-title {
+    margin-bottom: 6px;
+}
+
+.paper-title a {
+    font-family: 'basiic', monospace;
+    font-size: 1.05rem;
+    color: var(--text-dark);
+    text-decoration: none;
+}
+
+.paper-title a:hover {
+    color: var(--accent);
+}
+
+.paper-authors {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    margin-bottom: 4px;
+}
+
+.paper-authors .author-link {
+    color: var(--link);
+    text-decoration: none;
+    border-bottom: 1px dotted var(--link);
+}
+
+.paper-authors .author-link:hover {
+    color: var(--link-hover);
+}
+
+.paper-venue {
+    font-size: 0.8rem;
+    color: var(--text-muted);
+    font-style: italic;
+    margin-bottom: 8px;
+}
+
+.paper-links {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+
+.paper-links a {
+    font-size: 0.8rem;
+    color: var(--card-bg);
+    background: var(--link);
+    padding: 3px 8px;
+    border-radius: 0;
+    text-decoration: none;
+    transition: background 0.2s;
+}
+
+.paper-links a:hover {
+    background: var(--link-hover);
+}
+
+
+/* ========================================
+   Gallery Page Styles
+   ======================================== */
+
+.gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 20px;
+}
+
+.gallery-card {
+    background: var(--card-bg);
+    border: 2px solid var(--card-border);
+    box-shadow: 4px 4px 0 var(--card-shadow);
+    overflow: hidden;
+}
+
+.gallery-card.clickable {
+    cursor: pointer;
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.gallery-card.clickable:hover {
+    transform: translate(-2px, -2px);
+    box-shadow: 6px 6px 0 var(--card-shadow);
+}
+
+.photo-count {
+    margin-left: 8px;
+    opacity: 0.7;
+}
+
+.gallery-card-img {
+    aspect-ratio: 4/3;
+    background: var(--card-bg);
+    border-bottom: 2px solid var(--card-border);
+    overflow: hidden;
+}
+
+.gallery-card-img img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.gallery-card-placeholder {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 3rem;
+    background: linear-gradient(135deg, var(--card-bg) 0%, var(--card-bg-alt) 100%);
+}
+
+.gallery-card-info {
+    padding: 16px;
+}
+
+.gallery-card-date {
+    font-size: 0.7rem;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.gallery-card-info h3 {
+    font-family: 'basiic', monospace;
+    font-size: 1.1rem;
+    color: var(--text-dark);
+    margin: 6px 0 8px;
+}
+
+.gallery-card-info p {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    line-height: 1.4;
+}
+
+/* Old gallery styles (kept for compatibility) */
+.gallery-section {
+    margin-top: 0;
+}
+
+.update {
+    background: var(--card-bg);
+    border: 1px solid var(--card-border);
+    border-radius: 0;
+    padding: 16px;
+    margin-bottom: 20px;
+}
+
+.update-date {
+    font-size: 0.75rem;
+    color: var(--accent);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.update h3 {
+    font-family: 'basiic', monospace;
+    font-size: 1.1rem;
+    color: var(--text-dark);
+    margin: 6px 0 8px;
+}
+
+.update p {
+    font-size: 0.9rem;
+    color: var(--text-muted);
+    margin-bottom: 12px;
+}
+
+.photo-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+    gap: 10px;
+}
+
+.photo-placeholder {
+    aspect-ratio: 4/3;
+    background: linear-gradient(135deg, var(--card-bg) 0%, #fff 100%);
+    border: 1px dashed var(--card-border);
+    border-radius: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--text-muted);
+    font-size: 0.8rem;
+}
+
+.photo-grid img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 0;
+    border: 1px solid var(--card-border);
+}
+
+
+/* ========================================
+   📱 Mobile Responsive - Single Column
+   ======================================== */
+
+@media (max-width: 1000px) {
+    .home-layout {
+        display: flex;
+        flex-direction: column;
+        padding: 20px;
+        gap: 16px;
+    }
+
+    .card {
+        width: 100%;
+        margin: 0 !important;  /* Reset all the quirky offsets on mobile */
+    }
+
+    .card-publications {
+        min-height: auto;
+    }
+
+    .card-gallery-preview {
+        margin-top: 0 !important;  /* No overlap on mobile */
+    }
+
+    .papers-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+@media (max-width: 600px) {
+    .home-layout {
+        padding: 16px;
+    }
+
+    .papers-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 12px;
+    }
+
+    .paper-icon-img {
+        width: 60px;
+        height: 75px;
+    }
+
+    .page-header {
+        flex-direction: column;
+        gap: 12px;
+        align-items: flex-start;
+    }
+
+    .page-nav {
+        width: 100%;
+        justify-content: flex-start;
+    }
+
+    .photo-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+
+/* ========================================
+   Lightbox Styles
+   ======================================== */
+
+.lightbox {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.95);
+    z-index: 1000;
+    align-items: center;
+    justify-content: center;
+}
+
+.lightbox.active {
+    display: flex;
+}
+
+.lightbox-content {
+    max-width: 90%;
+    max-height: 90%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.lightbox-content img {
+    max-width: 100%;
+    max-height: 80vh;
+    object-fit: contain;
+    border: 4px solid var(--card-bg);
+}
+
+.lightbox-caption {
+    margin-top: 16px;
+    color: var(--card-bg);
+    font-family: 'basiic', monospace;
+    display: flex;
+    gap: 20px;
+    align-items: center;
+}
+
+#lightbox-title {
+    font-size: 1.1rem;
+}
+
+#lightbox-counter {
+    font-size: 0.9rem;
+    opacity: 0.7;
+}
+
+.lightbox-close,
+.lightbox-prev,
+.lightbox-next {
+    position: absolute;
+    background: none;
+    border: none;
+    color: var(--card-bg);
+    font-size: 2.5rem;
+    cursor: pointer;
+    padding: 20px;
+    transition: opacity 0.2s;
+    font-family: 'basiic', monospace;
+}
+
+.lightbox-close:hover,
+.lightbox-prev:hover,
+.lightbox-next:hover {
+    opacity: 0.7;
+}
+
+.lightbox-close {
+    top: 10px;
+    right: 20px;
+    font-size: 3rem;
+}
+
+.lightbox-prev {
+    left: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.lightbox-next {
+    right: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+@media (max-width: 600px) {
+    .lightbox-prev,
+    .lightbox-next {
+        font-size: 2rem;
+        padding: 10px;
+    }
+    
+    .lightbox-close {
+        font-size: 2rem;
+    }
+}
+
+
+/* ========================================
+   Scrollbar Styling (Chrome/Safari/Edge)
+   ======================================== */
+
+::-webkit-scrollbar {
+    width: 10px;
+}
+
+::-webkit-scrollbar-track {
+    background: var(--bg-main);
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--card-border);
+    border-radius: 0;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--text-muted);
+}

@@ -1,0 +1,11 @@
+{
+  "id": "kittens",
+  "date": "January 2025",
+  "sortDate": "2025-01",
+  "title": "got kitties",
+  "description": "adopted maple breakfast sandwich (maple, girl, tabby) and robert dollar (bobby, boy, black)",
+  "photos": ["gallery/photos/maple_kitten.jpg", "gallery/photos/bobby_kitten.jpg"],
+  "featured": true
+}
+
+

@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>updates - pkseeg.com</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="page-layout">
+        <div class="page-card">
+            <div class="page-header">
+                <h1>updates</h1>
+                <nav class="page-nav">
+                    <a href="index.html">pkseeg.com</a>
+                    <a href="publications.html">papers</a>
+                    <a href="gallery.html" class="active">updates</a>
+                </nav>
+            </div>
+            <div class="page-body">
+                <div id="gallery-grid" class="gallery-grid">
+                    <!-- Updates loaded dynamically -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Lightbox overlay -->
+    <div id="lightbox" class="lightbox">
+        <button class="lightbox-close" onclick="closeLightbox()">×</button>
+        <button class="lightbox-prev" onclick="prevPhoto()">‹</button>
+        <button class="lightbox-next" onclick="nextPhoto()">›</button>
+        <div class="lightbox-content">
+            <img id="lightbox-img" src="" alt="">
+            <div class="lightbox-caption">
+                <span id="lightbox-title"></span>
+                <span id="lightbox-counter"></span>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/gallery.js"></script>
+    <script>
+        let currentPhotos = [];
+        let currentIndex = 0;
+        let currentTitle = '';
+
+        function openLightbox(photos, title, startIndex = 0) {
+            if (!photos || photos.length === 0) return;
+            
+            currentPhotos = photos;
+            currentTitle = title;
+            currentIndex = startIndex;
+            
+            updateLightboxImage();
+            document.getElementById('lightbox').classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeLightbox() {
+            document.getElementById('lightbox').classList.remove('active');
+            document.body.style.overflow = '';
+        }
+
+        function updateLightboxImage() {
+            document.getElementById('lightbox-img').src = currentPhotos[currentIndex];
+            document.getElementById('lightbox-title').textContent = currentTitle;
+            document.getElementById('lightbox-counter').textContent = 
+                `${currentIndex + 1} / ${currentPhotos.length}`;
+        }
+
+        function nextPhoto() {
+            currentIndex = (currentIndex + 1) % currentPhotos.length;
+            updateLightboxImage();
+        }
+
+        function prevPhoto() {
+            currentIndex = (currentIndex - 1 + currentPhotos.length) % currentPhotos.length;
+            updateLightboxImage();
+        }
+
+        // Keyboard navigation
+        document.addEventListener('keydown', (e) => {
+            if (!document.getElementById('lightbox').classList.contains('active')) return;
+            
+            if (e.key === 'Escape') closeLightbox();
+            if (e.key === 'ArrowRight') nextPhoto();
+            if (e.key === 'ArrowLeft') prevPhoto();
+        });
+
+        // Close on background click
+        document.getElementById('lightbox').addEventListener('click', (e) => {
+            if (e.target.id === 'lightbox') closeLightbox();
+        });
+
+        // Render gallery as clickable cards
+        async function renderGalleryGrid(containerId) {
+            const container = document.getElementById(containerId);
+            if (!container) return;
+            
+            const updates = await loadGalleryUpdates();
+            
+            container.innerHTML = updates.map((update, idx) => {
+                const photoPreview = update.photos && update.photos.length > 0 
+                    ? `<img src="${update.photos[0]}" alt="${update.title}">`
+                    : `<div class="gallery-card-placeholder">📷</div>`;
+                
+                const hasPhotos = update.photos && update.photos.length > 0;
+                const photoCount = hasPhotos ? `<span class="photo-count">${update.photos.length} 📷</span>` : '';
+                
+                return `
+                    <div class="gallery-card ${hasPhotos ? 'clickable' : ''}" 
+                         data-index="${idx}"
+                         onclick="handleCardClick(${idx})">
+                        <div class="gallery-card-img">
+                            ${photoPreview}
+                        </div>
+                        <div class="gallery-card-info">
+                            <span class="gallery-card-date">${update.date} ${photoCount}</span>
+                            <h3>${update.title}</h3>
+                            <p>${update.description}</p>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+            
+            // Store updates globally for lightbox access
+            window.galleryUpdates = updates;
+        }
+
+        function handleCardClick(index) {
+            const update = window.galleryUpdates[index];
+            if (update.photos && update.photos.length > 0) {
+                openLightbox(update.photos, update.title);
+            }
+        }
+        
+        renderGalleryGrid('gallery-grid');
+    </script>
+</body>
+</html>

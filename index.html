@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Name</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="home-layout">
+        <!-- Left Column -->
+        <div class="card card-welcome">
+            <div class="card-header">pkseeg.com</div>
+            <div class="card-body">
+                <h1>Parker Seegmiller</h1>
+                <p class="subtitle">Ph.D. Candidate</p>
+                <p class="affiliation">Dartmouth College</p>
+                <p class="affiliation">Department of Computer Science</p>
+            </div>
+        </div>
+
+        <div class="card card-about">
+            <div class="card-header">about me</div>
+            <div class="card-body">
+                <p>
+                    fifth year phd student and innovation fellow at dartmouth, formerly at amazon agi and cvs
+                </p>
+            </div>
+        </div>
+
+        <div class="card card-links">
+            <div class="card-header">find me</div>
+            <div class="card-body">
+                <ul>
+                    <li><a href="https://scholar.google.com/citations?user=bU_Xi10AAAAJ&hl=en" target="_blank">scholar</a></li>
+                    <li><a href="https://github.com/pkseeg" target="_blank">github</a></li>
+                    <li><a href="https://www.linkedin.com/in/parker-seegmiller-8aa583172/">linkedin</a></li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Center Column - Publications -->
+        <div class="card card-publications">
+            <div class="card-header">research papers</div>
+            <div class="card-body">
+                <div id="papers-grid" class="papers-grid">
+                    <!-- Papers loaded dynamically -->
+                </div>
+                <div class="papers-footer">
+                    <a href="publications.html">all papers →</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Right Column -->
+        <div class="card card-nav">
+            <div class="card-header">navigation</div>
+            <div class="card-body">
+                <ul>
+                    <li><a href="index.html" class="active">pkseeg.com</a></li>
+                    <li><a href="publications.html">papers</a></li>
+                    <li><a href="gallery.html">updates</a></li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="card card-interests">
+            <div class="card-header">research interests</div>
+            <div class="card-body">
+                <span class="interest-tag">llms</span>
+                <span class="interest-tag">clinical nlp</span>
+                <span class="interest-tag">text distributions</span>
+                <span class="interest-tag">statistics</span>
+                <span class="interest-tag">sports analytics</span>
+            </div>
+        </div>
+
+        <div class="card card-gallery-preview">
+            <div class="card-header">updates</div>
+            <div class="card-body">
+                <div id="gallery-mini-preview" class="gallery-mini">
+                    <!-- Loaded dynamically from gallery JSON -->
+                </div>
+                <a href="gallery.html" class="gallery-link">all updates →</a>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/papers.js"></script>
+    <script src="js/gallery.js"></script>
+    <script>
+        // Render featured gallery items on homepage
+        async function renderGalleryPreview(containerId) {
+            const container = document.getElementById(containerId);
+            if (!container) return;
+            
+            const updates = await loadGalleryUpdates();
+            const featured = updates.filter(u => u.featured);
+            
+            container.innerHTML = featured.map(update => {
+                const preview = update.photos && update.photos.length > 0
+                    ? `<img src="${update.photos[0]}" alt="${update.title}">`
+                    : `<span>📷</span>`;
+                return `
+                    <a href="gallery.html" class="gallery-mini-item" title="${update.title}">
+                        ${preview}
+                    </a>
+                `;
+            }).join('');
+        }
+        
+        renderGalleryPreview('gallery-mini-preview');
+
+        // Custom render for icon grid on homepage
+        async function renderPaperIcons(containerId) {
+            const container = document.getElementById(containerId);
+            if (!container) return;
+            
+            const papers = await loadPapers();
+            const featured = papers.filter(p => p.featured);
+            
+            container.innerHTML = featured.map(paper => {
+                // Use custom icon if provided, otherwise show default
+                const iconContent = paper.icon 
+                    ? `<img src="${paper.icon}" alt="${paper.tldr || 'Paper'}" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+                       <span class="paper-icon-fallback" style="display:none;">📄</span>`
+                    : `<span class="paper-icon-fallback">📄</span>`;
+                
+                // Use tldr if provided, otherwise use short title
+                const label = paper.tldr || paper.title.split(':')[0].substring(0, 15);
+                
+                return `
+                    <a href="${paper.links?.paper || 'publications.html'}" target="_blank" class="paper-icon">
+                        <div class="paper-icon-img">${iconContent}</div>
+                        <div class="paper-icon-label">${label}</div>
+                    </a>
+                `;
+            }).join('');
+        }
+        
+        renderPaperIcons('papers-grid');
+    </script>
+</body>
+</html>

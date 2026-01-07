@@ -1,0 +1,16 @@
+{
+  "id": "paper4",
+  "title": "Earlier Work: Foundations of Your Research Area",
+  "tldr": "Foundations",
+  "icon": "icons/paper4.png",
+  "authors": ["Your Name", "Collaborator Four", "Advisor Name"],
+  "authorHighlight": "Your Name",
+  "venue": "Empirical Methods in Natural Language Processing (EMNLP)",
+  "year": 2023,
+  "featured": false,
+  "links": {
+    "paper": "https://arxiv.org/abs/example4",
+    "code": "https://github.com/you/project4",
+    "demo": "https://your-demo.com"
+  }
+}

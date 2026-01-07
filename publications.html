@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>papers - pkseeg.com</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="page-layout">
+        <div class="page-card">
+            <div class="page-header">
+                <h1>papers</h1>
+                <nav class="page-nav">
+                    <a href="index.html">pkseeg.com</a>
+                    <a href="publications.html" class="active">papers</a>
+                    <a href="gallery.html">updates</a>
+                </nav>
+            </div>
+            <div class="page-body">
+                <div id="all-papers">
+                    <!-- Papers loaded dynamically -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/papers.js"></script>
+    <script>
+        // Custom render with styled year headers
+        async function renderAllPapersStyled(containerId) {
+            const container = document.getElementById(containerId);
+            if (!container) return;
+            
+            const papers = await loadPapers();
+            
+            // Group by year
+            const byYear = {};
+            papers.forEach(p => {
+                const year = p.year.toString();
+                if (!byYear[year]) byYear[year] = [];
+                byYear[year].push(p);
+            });
+            
+            // Sort years
+            const years = Object.keys(byYear).sort((a, b) => {
+                if (a === 'Preprint') return 1;
+                if (b === 'Preprint') return -1;
+                return parseInt(b) - parseInt(a);
+            });
+            
+            let html = '';
+            for (const year of years) {
+                const label = year === 'Preprint' ? 'preprints' : year;
+                html += `<h2 class="pub-year">${label}</h2>`;
+                html += byYear[year].map(renderPaperHTML).join('');
+            }
+            
+            container.innerHTML = html;
+        }
+        
+        renderAllPapersStyled('all-papers');
+    </script>
+</body>
+</html>

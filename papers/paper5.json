@@ -1,0 +1,14 @@
+{
+  "id": "paper5",
+  "title": "Workshop Paper: Preliminary Results on an Interesting Problem",
+  "tldr": "Exploration",
+  "icon": "icons/paper5.png",
+  "authors": ["Your Name", "Collaborator Five"],
+  "authorHighlight": "Your Name",
+  "venue": "Workshop on Something Cool @ NeurIPS",
+  "year": 2023,
+  "featured": false,
+  "links": {
+    "paper": "https://arxiv.org/abs/example5"
+  }
+}

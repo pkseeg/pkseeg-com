@@ -1,0 +1,18 @@
+{
+  "id": "depth",
+  "title": "Statistical Depth for Ranking and Characterizing Transformer-Based Text Embeddings",
+  "tldr": "depth",
+  "icon": "icons/depth.png",
+  "authors": [
+    { "name": "Parker Seegmiller", "url": "https://pkseeg.com" },
+    { "name": "Sarah Preum", "url": "https://persist-lab.github.io/portfolio/" }
+  ],
+  "authorHighlight": "Parker Seegmiller",
+  "venue": "EMNLP",
+  "year": 2023,
+  "featured": true,
+  "links": {
+    "paper": "https://aclanthology.org/2023.emnlp-main.596/",
+    "code": "https://github.com/pkseeg/tte_depth"
+  }
+}
