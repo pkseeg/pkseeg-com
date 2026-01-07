@@ -1,0 +1,14 @@
+{
+  "id": "nova",
+  "title": "The amazon nova family of models: Technical report and model card",
+  "tldr": "nova",
+  "icon": "icons/nova.png",
+  "authors": ["Amazon AGI"],
+  "authorHighlight": "Amazon AGI",
+  "venue": "Technical Report",
+  "year": 2024,
+  "featured": true,
+  "links": {
+    "paper": "https://www.amazon.science/publications/the-amazon-nova-family-of-models-technical-report-and-model-card?utm_source=www.techopsexamples.com&utm_medium=referral&utm_campaign=improving-kubernetes-latency-with-external-traffic-policy-and-session-affinity"
+  }
+}

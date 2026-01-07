@@ -1,0 +1,14 @@
+{
+  "id": "flames",
+  "title": "FLAMES: Improving LLM Math Reasoning via a Fine-Grained Analysis of the Data Synthesis Pipeline",
+  "tldr": "flames",
+  "icon": "icons/flames.png",
+  "authors": ["Parker Seegmiller", "Kartik Mehta", "Soumya Saha", "Chenyang Tao", "Shereen Oraby", "Arpit Gupta", "Tagyoung Chung", "Mohit Bansal", "Nanyun Peng"], 
+  "authorHighlight": "Parker Seegmiller",
+  "venue": "EMNLP",
+  "year": 2025,
+  "featured": true,
+  "links": {
+    "paper": "https://aclanthology.org/2025.findings-emnlp.1346/"
+  }
+}

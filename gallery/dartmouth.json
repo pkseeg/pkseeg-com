@@ -1,0 +1,9 @@
+{
+    "id": "dartmouth",
+    "date": "August 2021",
+    "sortDate": "2021-08",
+    "title": "started my phd",
+    "description": "started my phd at dartmouth in sarah preum's lab (candice, my wife, pictured)",
+    "photos": ["gallery/photos/dartmouth.jpg"],
+    "featured": false
+  }

@@ -1,0 +1,9 @@
+{
+    "id": "houston",
+    "date": "June 2023",
+    "sortDate": "2023-06",
+    "title": "went to ichi 2023",
+    "description": "went to ichi 2023 in houston to present my mtc extraction paper",
+    "photos": ["gallery/photos/houston_1.jpg", "gallery/photos/houston_2.jpg", "gallery/photos/houston_3.jpg"],
+    "featured": false
+}

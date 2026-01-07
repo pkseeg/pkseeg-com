@@ -1,0 +1,9 @@
+{
+    "id": "emnlp",
+    "date": "December 2023",
+    "sortDate": "2023-12",
+    "title": "went to emnlp",
+    "description": "went to emnlp in singapore (on my lonesome) to present my depth paper",
+    "photos": ["gallery/photos/emnlp_1.jpg", "gallery/photos/emnlp_2.jpg", "gallery/photos/emnlp_3.jpg"],
+    "featured": true
+}

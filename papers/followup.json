@@ -1,0 +1,23 @@
+{
+    "id": "followup",
+    "title": "Follow-up Question Generation For Enhanced Patient-Provider Conversations",
+    "tldr": "followup",
+    "icon": "icons/followup.png",
+    "authors": [
+      { "name": "Joseph Gatto", "url": "https://josephgatto.github.io/" },
+      { "name": "Parker Seegmiller", "url": "https://pkseeg.com" },
+      { "name": "Timothy E. Burdick", "url": "https://scholar.google.com/citations?user=3QKqoHYAAAAJ&hl=en&oi=ao" },
+      { "name": "Inas Khayal", "url": "https://scholar.google.com/citations?hl=en&user=Od8Ci_IAAAAJ" },
+      { "name": "Sarah DeLozier", "url": "" },
+      { "name": "Sarah Preum", "url": "https://persist-lab.github.io/portfolio/" }
+    ],
+    "authorHighlight": "Parker Seegmiller",
+    "venue": "ACL",
+    "year": 2025,
+    "featured": true,
+    "links": {
+      "paper": "https://aclanthology.org/2025.acl-long.1226/",
+      "code": "https://huggingface.co/datasets/PortalPal-AI/Followup-Q"
+    }
+  }
+  

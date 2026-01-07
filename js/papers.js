@@ -1,18 +1,13 @@
-// List of paper files - add new papers here
-const PAPER_FILES = [
-  'paper1.json',
-  'paper2.json',
-  'paper3.json',
-  'paper4.json',
-  'paper5.json',
-  'paper6.json'
-];
+// Paper files to load - add new paper filenames here
+const PAPER_FILES = ['depth.json', 'flames.json', 'nova.json', 'followup.json', 'madlibs.json'];
 
 async function loadPapers() {
   const papers = [];
+  
   for (const file of PAPER_FILES) {
     try {
-      const response = await fetch(`papers/${file}`);
+      // Add cache-busting timestamp to avoid stale cached files
+      const response = await fetch(`papers/${file}?t=${Date.now()}`);
       if (response.ok) {
         papers.push(await response.json());
       }

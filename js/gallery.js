@@ -1,8 +1,11 @@
 // List of gallery update files - add new updates here
 const GALLERY_FILES = [
-  'update1.json',
-  'update2.json',
-  'update3.json'
+  'colm.json',
+  'kittens.json',
+  'amazon.json',
+  'emnlp.json',
+  'houston.json',
+  'dartmouth.json'
 ];
 
 async function loadGalleryUpdates() {

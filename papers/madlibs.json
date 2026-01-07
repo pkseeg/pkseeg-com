@@ -1,0 +1,20 @@
+{
+    "id": "madlibs",
+    "title": "Document-Level Event-Argument Data Augmentation for Challenging Role Types",
+    "tldr": "madlibs",
+    "icon": "icons/madlibs.png",
+    "authors": [
+      { "name": "Joseph Gatto", "url": "https://josephgatto.github.io/" },
+      { "name": "Omar Sharif", "url": "https://omar-sharif.github.io/" },
+      { "name": "Parker Seegmiller", "url": "https://pkseeg.com" },
+      { "name": "Sarah Preum", "url": "https://persist-lab.github.io/portfolio/" }
+    ],
+    "authorHighlight": "Parker Seegmiller",
+    "venue": "ACL",
+    "year": 2025,
+    "featured": false,
+    "links": {
+      "paper": "https://aclanthology.org/2025.acl-long.1221/"
+    }
+  }
+  
