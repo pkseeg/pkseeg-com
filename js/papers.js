@@ -1,5 +1,5 @@
 // Paper files to load - add new paper filenames here
-const PAPER_FILES = ['depth.json', 'flames.json', 'nova.json', 'followup.json', 'madlibs.json'];
+const PAPER_FILES = ['depth.json', 'flames.json', 'nova.json', 'followup.json', 'madlibs.json', 'tadpole.json'];
 
 async function loadPapers() {
   const papers = [];

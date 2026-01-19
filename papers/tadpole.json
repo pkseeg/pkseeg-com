@@ -1,0 +1,24 @@
+{
+    "id": "tadpole",
+    "title": "How Much Would a Clinician Edit This Draft? Evaluating LLM Alignment for Patient Message Response Drafting",
+    "tldr": "tadpole",
+    "icon": "icons/tadpole.png",
+    "authors": [
+      { "name": "Parker Seegmiller", "url": "https://pkseeg.com" },
+      { "name": "Joseph Gatto", "url": "https://josephgatto.github.io/" },
+      { "name": "Sarah E. Greer"},
+      { "name": "Ganza Belise Isingizwe"},
+      { "name": "Rohan Ray"},
+      { "name": "Timothy E. Burdick", "url": "https://scholar.google.com/citations?user=3QKqoHYAAAAJ&hl=en&oi=ao" },
+      { "name": "Sarah Preum", "url": "https://persist-lab.github.io/portfolio/" }
+    ],
+    "authorHighlight": "Parker Seegmiller",
+    "venue": "Pre-print",
+    "year": 2026,
+    "featured": true,
+    "links": {
+      "paper": "https://arxiv.org/pdf/2601.11344",
+      "code": "https://huggingface.co/collections/PortalPal-AI/evaluating-alignment-for-patient-message-response-drafting"
+    }
+  }
+  
