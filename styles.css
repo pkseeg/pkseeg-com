@@ -924,3 +924,26 @@ body::before {
 ::-webkit-scrollbar-thumb:hover {
     background: var(--text-muted);
 }
+
+
+/* ========================================
+   Cloze Game Card (Right Column)
+   ======================================== */
+
+.card-cloze {
+    grid-column: 3;
+    grid-row: 3;
+    margin-right: 5px;
+    margin-top: -5px;
+}
+
+.card-cloze a {
+    color: var(--link);
+    text-decoration: none;
+    font-size: 0.9rem;
+    transition: color 0.2s;
+}
+
+.card-cloze a:hover {
+    color: var(--link-hover);
+}
