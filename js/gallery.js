@@ -1,5 +1,6 @@
 // List of gallery update files - add new updates here
 const GALLERY_FILES = [
+  'proposed.json',
   'colm.json',
   'kittens.json',
   'amazon.json',
