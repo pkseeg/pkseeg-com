@@ -927,6 +927,32 @@ body::before {
 
 
 /* ========================================
+   CV Card (Left Column)
+   ======================================== */
+
+.card-cv {
+    grid-column: 1;
+    grid-row: 4;
+    margin-left: 8px;
+    margin-top: 4px;
+}
+
+.card-cv a {
+    color: var(--link);
+    text-decoration: none;
+    font-size: 0.9rem;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition: color 0.2s;
+}
+
+.card-cv a:hover {
+    color: var(--link-hover);
+}
+
+
+/* ========================================
    Cloze Game Card (Right Column)
    ======================================== */
 
