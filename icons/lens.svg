@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Icon: search
+  Set: Pixelarticons
+  Author: Gerrit Halfmann (https://github.com/halfmage/pixelarticons)
+  License: MIT (https://github.com/halfmage/pixelarticons/blob/master/LICENSE)
+  Source: https://iconify.design
+-->
+<svg xmlns="http://www.w3.org/2000/svg"
+     xmlns:xlink="http://www.w3.org/1999/xlink"
+     viewBox="0 0 24 24"
+     width="24"
+     height="24">
+  <title>Pixelated Magnifying Glass Icon</title>
+  <metadata>
+    <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+             xmlns:dc="http://purl.org/dc/elements/1.1/"
+             xmlns:cc="http://creativecommons.org/ns#">
+      <cc:Work rdf:about="">
+        <dc:title>Pixelated Magnifying Glass Icon</dc:title>
+        <dc:description>A pixelated magnifying glass icon, ideal for retro, digital, or search-related designs. Perfect for websites, apps, and projects with a vintage or 8-bit aesthetic.</dc:description>
+        <dc:creator>
+          <cc:Agent>
+            <dc:title>Gerrit Halfmann</dc:title>
+          </cc:Agent>
+        </dc:creator>
+        <dc:source>https://github.com/halfmage/pixelarticons</dc:source>
+        <dc:rights>
+          <cc:Agent>
+            <dc:title>Gerrit Halfmann</dc:title>
+          </cc:Agent>
+        </dc:rights>
+        <cc:license rdf:resource="https://github.com/halfmage/pixelarticons/blob/master/LICENSE"/>
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type rdf:resource="http://purl.org/dc/dcmitype/StillImage"/>
+        <dc:subject>
+          <rdf:Bag>
+            <rdf:li>pixelated-magnifying-glass</rdf:li>
+            <rdf:li>search-icon</rdf:li>
+            <rdf:li>retro-magnifier</rdf:li>
+            <rdf:li>8-bit-style</rdf:li>
+            <rdf:li>pixel-art</rdf:li>
+            <rdf:li>magnifying-glass-graphic</rdf:li>
+            <rdf:li>digital-search</rdf:li>
+            <rdf:li>retro-design</rdf:li>
+            <rdf:li>pixel-search-icon</rdf:li>
+            <rdf:li>vintage-magnifier</rdf:li>
+            <rdf:li>pixelated-graphic</rdf:li>
+            <rdf:li>search-tool-icon</rdf:li>
+            <rdf:li>magnifier-symbol</rdf:li>
+            <rdf:li>retro-pixel-icon</rdf:li>
+            <rdf:li>pixelated-design</rdf:li>
+          </rdf:Bag>
+        </dc:subject>
+      </cc:Work>
+      <cc:License rdf:about="https://github.com/halfmage/pixelarticons/blob/master/LICENSE">
+        <dc:title>MIT (MIT)</dc:title>
+      </cc:License>
+    </rdf:RDF>
+  </metadata>
+  <path fill="currentColor" d="M6 2h8v2H6zM4 6V4h2v2zm0 8H2V6h2zm2 2H4v-2h2zm8 0v2H6v-2zm2-2h-2v2h2v2h2v2h2v2h2v-2h-2v-2h-2v-2h-2zm0-8h2v8h-2zm0 0V4h-2v2z"/>
+</svg>

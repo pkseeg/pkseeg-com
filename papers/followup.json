@@ -14,7 +14,7 @@
     "authorHighlight": "Parker Seegmiller",
     "venue": "ACL",
     "year": 2025,
-    "featured": true,
+    "featured": false,
     "links": {
       "paper": "https://aclanthology.org/2025.acl-long.1226/",
       "code": "https://huggingface.co/datasets/PortalPal-AI/Followup-Q"

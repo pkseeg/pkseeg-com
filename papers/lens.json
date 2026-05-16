@@ -1,0 +1,19 @@
+{
+    "id": "lens",
+    "title": "Measuring Distribution Shift in User Prompts and Its Effects on LLM Performance",
+    "tldr": "lens",
+    "icon": "icons/lens.svg",
+    "authors": [
+      { "name": "Parker Seegmiller", "url": "https://pkseeg.com" },
+      { "name": "Sarah Preum", "url": "https://persist-lab.github.io/portfolio/" }
+    ],
+    "authorHighlight": "Parker Seegmiller",
+    "venue": "ACL",
+    "year": 2026,
+    "featured": true,
+    "links": {
+      "paper": "https://arxiv.org/pdf/2604.17650",
+      "code": "https://github.com/pkseeg/lens"
+    }
+  }
+  
