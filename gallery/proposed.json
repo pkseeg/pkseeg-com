@@ -5,5 +5,5 @@
     "title": "proposed my thesis",
     "description": "proposed my phd thesis and passed -- should've taken a photo",
     "photos": ["gallery/photos/proposal.png"],
-    "featured": true
+    "featured": false
 }
