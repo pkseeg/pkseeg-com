@@ -52,6 +52,14 @@ async function renderPost(folderId, postId) {
 
         container.innerHTML = breadcrumb + `<div class="blog-post-body">${html}</div>`;
 
+        // Fix relative image paths — markdown srcs resolve against blogs.html (root),
+        // but assets sit alongside the .md file in blogs/<folder>/
+        container.querySelectorAll('img').forEach(img => {
+            if (img.src && !img.src.startsWith('http') && !img.getAttribute('src').startsWith('/')) {
+                img.src = `blogs/${folderId}/${img.getAttribute('src')}`;
+            }
+        });
+
         const h1 = container.querySelector('h1');
         if (h1) {
             document.title = `pkseeg — ${h1.textContent}`;

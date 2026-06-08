@@ -1,5 +1,6 @@
 // List of gallery update files - add new updates here
 const GALLERY_FILES = [
+  'collinear.json',
   'acl2026.json',
   'proposed.json',
   'colm.json',
