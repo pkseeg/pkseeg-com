@@ -1,0 +1,26 @@
+{
+  "folders": [
+    {
+      "id": "lithuanian-nlp",
+      "label": "lithuanian nlp",
+      "posts": [
+        {
+          "id": "tokenization",
+          "title": "Why Lithuanian Needs Case-Aware Tokenization",
+          "subtitle": "Experiments in morphological tokenization for a highly inflected language",
+          "date": "2025"
+        }
+      ]
+    },
+    {
+      "id": "sports",
+      "label": "sports",
+      "posts": []
+    },
+    {
+      "id": "games",
+      "label": "games",
+      "posts": []
+    }
+  ]
+}
