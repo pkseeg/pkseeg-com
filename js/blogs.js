@@ -16,7 +16,7 @@ async function renderFolderView(folderId) {
     document.getElementById('page-title').textContent = folder.label;
     document.title = `pkseeg — ${folder.label}`;
 
-    const breadcrumb = `<div class="blog-breadcrumb"><a href="index.html">home</a> / <a href="blogs.html">writing</a> / ${folder.label}</div>`;
+    const breadcrumb = `<div class="blog-breadcrumb"><a href="index.html">home</a> / <a href="blogs.html">blogging</a> / ${folder.label}</div>`;
 
     if (folder.posts.length === 0) {
         container.innerHTML = breadcrumb + `<div class="blog-empty"><p>nothing here yet.</p></div>`;
@@ -48,7 +48,7 @@ async function renderPost(folderId, postId) {
 
         const html = marked.parse(mdText);
 
-        const breadcrumb = `<div class="blog-breadcrumb"><a href="index.html">home</a> / <a href="blogs.html">writing</a> / <a href="blogs.html?folder=${folderId}">${folderLabel}</a> / ${postId}</div>`;
+        const breadcrumb = `<div class="blog-breadcrumb"><a href="index.html">home</a> / <a href="blogs.html">blogging</a> / <a href="blogs.html?folder=${folderId}">${folderLabel}</a> / ${postId}</div>`;
 
         container.innerHTML = breadcrumb + `<div class="blog-post-body">${html}</div>`;
 

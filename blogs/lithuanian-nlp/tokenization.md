@@ -6,9 +6,9 @@
 
 ## Introduction
 
-When you train a language model, the tokenizer is doing invisible structural work before a single weight gets updated. For English, this mostly means splitting "unhappiness" into "un-", "happi-", "ness" — a minor convenience. For Lithuanian, it's the difference between a model that understands morphology and one that memorizes thousands of redundant word forms.
+Tokenization is the first step in training a language model. For English, tokenization mostly means splitting words like "unhappiness" into tokens like "un-", "happi-", and "ness". For Lithuanian, a case-heavy and grammatically-complex language, tokenization is the difference between a model that understands morphology and one that memorizes thousands of redundant word forms.
 
-Lithuanian is one of the oldest living Indo-European languages and one of the most grammatically complex. Every noun, adjective, and pronoun declines through **seven grammatical cases** — nominative, genitive, dative, accusative, instrumental, locative, and vocative. A single noun like *namas* (house) takes six distinct surface forms before you even pluralize it:
+Lithuanian is one of the oldest living Indo-European languages. Every noun, adjective, and pronoun declines through **seven grammatical cases** — nominative, genitive, dative, accusative, instrumental, locative, and vocative. A single noun like *namas* (house) takes six distinct surface forms (12 when considering pluralization):
 
 | Case | Form | Meaning |
 |------|------|---------|
@@ -19,13 +19,13 @@ Lithuanian is one of the oldest living Indo-European languages and one of the mo
 | INS | *namu* | with/by the house |
 | LOC | *name* | in/at the house |
 
-A standard BPE tokenizer trained on English-heavy data may never have seen most of these forms. Even a tokenizer trained on Lithuanian may fragment them inconsistently — producing a different stem token for *namas*, *namą*, and *namu* — making it harder for a model to learn that these are all instances of the same lexeme.
+A standard BPE tokenizer trained on English-heavy data may never have seen most of these forms. Even a tokenizer trained on Lithuanian may fragment them inconsistently — producing a different stem token for *namas*, *namą*, and *namu* — making it harder for a model to learn that these are all instances of the same lexeme, and potentially impacting downstream utility of such models.
 
 **Our hypothesis**: a tokenizer that is explicitly informed about morphological structure — specifically, about where case suffixes begin — should segment Lithuanian paradigms more consistently, leading to better representation of morphological relationships.
 
 ---
 
-## Related Work
+<!-- ## Related Work
 
 The idea of using morphological knowledge to improve subword tokenization has a longer history than most LM practitioners realize.
 
@@ -43,9 +43,9 @@ The idea of using morphological knowledge to improve subword tokenization has a 
 
 Our suffix table was informed by Ambrazas (1997), *Lithuanian Grammar* — the standard descriptive reference grammar of Lithuanian, produced by the Institute of the Lithuanian Language and covering all three main nominal declension classes and their case paradigms. In practice, the suffix entries reflect our working knowledge of Lithuanian morphology cross-referenced against Wiktionary paradigm tables, not a systematic reading of the grammar.
 
----
+--- -->
 
-## Setup
+## Experiments
 
 We compare three tokenizers on Lithuanian Wikipedia (`wikimedia/wikipedia`, `20231101.lt` — 211,292 articles):
 
@@ -96,11 +96,11 @@ Single-Token Coverage   ↑             0.430     0.775          0.886
 
 ### Fertility
 
-BPE-LT achieves the lowest fertility (1.885 tokens/word), which sounds like a win — it's the most compact. But this comes at a cost: it achieves compactness by memorizing whole inflected forms rather than decomposing them. MorphBPE-LT has slightly higher fertility (2.038) because it forces a stem/suffix split. XLM-RoBERTa fares worst at 2.181 — it simply isn't equipped for Lithuanian morphology.
+BPE-LT achieves the lowest fertility (1.885 tokens/word), which sounds like a win — it's the most compact. But this comes at a cost: it achieves compactness by memorizing whole inflected forms rather than decomposing them. MorphBPE-LT has slightly higher fertility (2.038) because it forces a stem/suffix split. XLM-RoBERTa fares worst at 2.181, which makes sense because it isn't designed for Lithuanian morphology.
 
 ### Paradigm Consistency
 
-This is the central result. MorphBPE-LT scores **0.667** — roughly two-thirds of the time, all six case forms of a paradigm share the same stem-initial token. BPE-LT scores **0.417**, actually *below* XLM-RoBERTa's 0.458. Standard BPE, optimized for compression, learns to store high-frequency inflected forms as single tokens. When the training corpus is large enough, it'll absorb *namas*, *namo*, *namui* as individual atomic units. This is computationally efficient but morphologically blind: the model sees no structural connection between these forms.
+Importantly, MorphBPE-LT scores **0.667** — roughly two-thirds of the time, all six case forms of a paradigm share the same stem-initial token. BPE-LT scores **0.417**, actually *below* XLM-RoBERTa's 0.458. Standard BPE, optimized for compression, learns to store high-frequency inflected forms as single tokens. When the training corpus is large enough, it'll absorb *namas*, *namo*, *namui* as individual atomic units. This is computationally efficient but morphologically blind: the model sees no structural connection between these forms.
 
 ### Suffix Isolation Rate
 
@@ -163,7 +163,7 @@ BPE-LT treats nominative/genitive as opaque tokens (*diena*, *dienos*) and fails
 
 Standard BPE is optimized for compression. Its objective is to find the most compact representation of the training corpus. For Lithuanian, this means absorbing high-frequency inflected forms as atomic tokens. *Namas*, *namo*, *diena*, *dienos* all appear thousands of times in Wikipedia, so BPE will encode them whole. This is efficient in bits-per-character but morphologically blind.
 
-MorphBPE-LT accepts slightly higher fertility (about 8% more tokens per word vs BPE-LT) in exchange for structural awareness. Its vocabulary stores morphemes rather than word forms. The payoff should appear when the model encounters low-frequency or unseen inflections: a model trained with MorphBPE-LT representations has seen `žmog` + `ų` (accusative suffix) as separate units and can generalize to other stems that take the same suffix, rather than relying on having memorized *žmogų* specifically.
+MorphBPE-LT accepts slightly higher fertility (about 8% more tokens per word vs BPE-LT) in exchange for structural awareness. Its vocabulary stores morphemes rather than word forms. We expect this payoff to appear when the model encounters low-frequency or unseen inflections: a model trained with MorphBPE-LT representations has seen `žmog` + `ų` (accusative suffix) as separate units and can generalize to other stems that take the same suffix, rather than relying on having memorized *žmogų* specifically.
 
 ### Consonant mutation
 
@@ -171,7 +171,7 @@ Lithuanian undergoes systematic consonant alternations at morpheme boundaries (*
 
 ### Why not just train on more data?
 
-A reasonable objection: wouldn't simply training BPE on more Lithuanian text eventually learn the same suffixes through frequency? Probably some of them, yes. But high-coverage morphological knowledge through frequency requires extremely large corpora, and Lithuanian is a low-resource language relative to English or German. MorphBPE-LT encodes morphological structure as an inductive bias, letting the tokenizer generalize with less data.
+A reasonable objection: wouldn't simply training BPE on more Lithuanian text eventually learn the same suffixes through frequency? Probably some of them, yes. But high-coverage morphological knowledge through frequency requires extremely large corpora, and Lithuanian is a low-resource language relative to English or other larger European languages like German. MorphBPE-LT encodes morphological structure as an inductive bias, letting the tokenizer generalize with less data.
 
 ### Implications for pretraining
 
@@ -181,7 +181,7 @@ These results suggest that for Lithuanian pretraining:
 2. **Standard BPE trained on Lithuanian helps fertility but not morphology** — BPE-LT gives the best compression but the worst paradigm consistency among our three tokenizers.
 3. **Case-aware pre-segmentation significantly improves morphological alignment** — MorphBPE-LT achieves 60% better paradigm consistency and 43% better suffix isolation than standard BPE-LT, at the cost of ~8% higher fertility.
 
----
+<!-- ---
 
 ## Future Work
 
@@ -199,7 +199,7 @@ Several extensions would strengthen these results:
 
 We set out to ask whether case-aware tokenization helps for Lithuanian, and the answer is yes — especially on the metrics that matter for morphological generalization. Morphological pre-segmentation before BPE training lifts paradigm consistency from 0.417 to 0.667 and suffix isolation from 0.438 to 0.625, establishing that the tokenizer is learning meaningful morphological units rather than memorizing surface forms.
 
-The tension with fertility is real but manageable. For a low-resource, highly inflected language like Lithuanian, we'd rather have a tokenizer that understands *namas* and *namą* as the same stem plus different suffixes than one that packs them into two opaque atoms and calls it efficient.
+The tension with fertility is real but manageable. For a low-resource, highly inflected language like Lithuanian, we'd rather have a tokenizer that understands *namas* and *namą* as the same stem plus different suffixes than one that packs them into two opaque atoms and calls it efficient. -->
 
 ---
 
