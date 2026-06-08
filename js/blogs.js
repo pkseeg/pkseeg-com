@@ -55,8 +55,9 @@ async function renderPost(folderId, postId) {
         // Fix relative image paths — markdown srcs resolve against blogs.html (root),
         // but assets sit alongside the .md file in blogs/<folder>/
         container.querySelectorAll('img').forEach(img => {
-            if (img.src && !img.src.startsWith('http') && !img.getAttribute('src').startsWith('/')) {
-                img.src = `blogs/${folderId}/${img.getAttribute('src')}`;
+            const src = img.getAttribute('src');
+            if (src && !src.startsWith('http') && !src.startsWith('/')) {
+                img.src = `blogs/${folderId}/${src}`;
             }
         });
 

@@ -5,7 +5,8 @@
     "title": "finished at amazon",
     "description": "completed my internship at amazon agi, loved all of it",
     "photos": ["gallery/photos/amazon.jpg"],
-    "featured": true
+    "featured": false,
+    "visible": false
 }
   
   

@@ -23,8 +23,10 @@ async function loadGalleryUpdates() {
       console.warn(`Could not load ${file}`);
     }
   }
-  // Sort by sortDate descending
-  return updates.sort((a, b) => b.sortDate.localeCompare(a.sortDate));
+  // Sort by sortDate descending, exclude hidden entries
+  return updates
+    .filter(u => u.visible !== false)
+    .sort((a, b) => b.sortDate.localeCompare(a.sortDate));
 }
 
 function renderUpdateHTML(update) {
