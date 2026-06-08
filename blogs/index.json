@@ -15,7 +15,14 @@
     {
       "id": "sports",
       "label": "sports",
-      "posts": []
+      "posts": [
+        {
+          "id": "nba-history",
+          "title": "Every NBA Franchise's Entire History in One Chart",
+          "subtitle": "76 years of basketball, plotted as cumulative win-loss differential",
+          "date": "2026"
+        }
+      ]
     },
     {
       "id": "games",
