@@ -1187,6 +1187,30 @@ body::before {
     font-style: italic;
 }
 
+/* Author byline, injected after the post's h1 */
+.blog-byline {
+    font-size: 0.8rem;
+    color: var(--text-muted);
+    margin: 0 0 20px;
+}
+
+.blog-byline a {
+    color: var(--text-muted);
+    text-decoration: underline;
+    text-underline-offset: 2px;
+}
+
+.blog-byline a:hover {
+    color: var(--link-hover);
+}
+
+/* KaTeX display equations from ```math fences */
+.blog-math {
+    margin: 20px 0;
+    overflow-x: auto;
+    text-align: center;
+}
+
 .blog-post-body strong {
     font-weight: 600;
 }

@@ -34,10 +34,24 @@ async function renderFolderView(folderId) {
     `</div>`;
 }
 
+function bylineHtml(authors) {
+    if (!authors || !authors.length) return '';
+    const links = authors.map(a => {
+        if (!a.url) return a.name;
+        const external = a.url.startsWith('http') ? ' target="_blank"' : '';
+        return `<a href="${a.url}"${external}>${a.name}</a>`;
+    });
+    const names = links.length > 1
+        ? links.slice(0, -1).join(', ') + ' and ' + links[links.length - 1]
+        : links[0];
+    return `<div class="blog-byline">by ${names}</div>`;
+}
+
 async function renderPost(folderId, postId) {
     const index = await loadBlogIndex();
     const folder = index.folders.find(f => f.id === folderId);
     const folderLabel = folder ? folder.label : folderId.replace(/-/g, ' ');
+    const meta = folder ? folder.posts.find(p => p.id === postId) : null;
 
     const container = document.getElementById('blog-content');
 
@@ -61,10 +75,22 @@ async function renderPost(folderId, postId) {
             }
         });
 
+        // Render ```math fences with KaTeX. Fenced blocks survive marked untouched,
+        // so backslashes and underscores reach us intact.
+        if (typeof katex !== 'undefined') {
+            container.querySelectorAll('pre code.language-math').forEach(code => {
+                const div = document.createElement('div');
+                div.className = 'blog-math';
+                katex.render(code.textContent.trim(), div, { displayMode: true, throwOnError: false });
+                code.parentElement.replaceWith(div);
+            });
+        }
+
         const h1 = container.querySelector('h1');
         if (h1) {
             document.title = `pkseeg — ${h1.textContent}`;
             document.getElementById('page-title').textContent = h1.textContent;
+            h1.insertAdjacentHTML('afterend', bylineHtml(meta && meta.authors));
         }
     } catch (e) {
         container.innerHTML = '<p class="blog-error">post not found.</p>';

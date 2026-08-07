@@ -8,7 +8,10 @@
           "id": "tokenization",
           "title": "Why Lithuanian Needs Case-Aware Tokenization",
           "subtitle": "Experiments in morphological tokenization for a highly inflected language",
-          "date": "2025"
+          "date": "2025",
+          "authors": [
+            { "name": "Parker Seegmiller", "url": "index.html" }
+          ]
         }
       ]
     },
@@ -20,14 +23,40 @@
           "id": "nba-history",
           "title": "Every NBA Franchise's Entire History in One Chart",
           "subtitle": "76 years of basketball, plotted as cumulative win-loss differential",
-          "date": "2026"
+          "date": "2026",
+          "authors": [
+            { "name": "Parker Seegmiller", "url": "index.html" }
+          ]
         }
       ]
     },
     {
-      "id": "games",
-      "label": "games",
-      "posts": []
+      "id": "user-sim",
+      "label": "user sim",
+      "posts": [
+        {
+          "id": "user-went-for-a-cigarette",
+          "title": "The User Went for a Cigarette",
+          "subtitle": "Modeling partial observability for high-fidelity user simulation",
+          "date": "july 2026",
+          "authors": [
+            { "name": "Parker Seegmiller", "url": "index.html" },
+            { "name": "Chinmaya Andukuri", "url": "https://scandukuri.github.io/" },
+            { "name": "Guga Gogia", "url": "https://www.linkedin.com/in/ggogia/" }
+          ]
+        },
+        {
+          "id": "uninterpretable-user",
+          "title": "The Uninterpretable User",
+          "subtitle": "What simulated users say when the agent isn't listening",
+          "date": "august 2026",
+          "authors": [
+            { "name": "Parker Seegmiller", "url": "index.html" },
+            { "name": "Chinmaya Andukuri", "url": "https://scandukuri.github.io/" },
+            { "name": "Guga Gogia", "url": "https://www.linkedin.com/in/ggogia/" }
+          ]
+        }
+      ]
     }
   ]
 }
